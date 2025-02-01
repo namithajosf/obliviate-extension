@@ -7,25 +7,26 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="dashboard">
+  <div id="popup">
     <h1>Obliviate</h1>
-    <div>
-      <p>Productive Time: <span id="productiveTime">0</span> seconds</p>
-      <p>Distracting Time: <span id="distractingTime">0</span> seconds</p>
-      <p>Productivity Score: <span id="score">0</span></p>
+
+    <!-- Break Timer -->
+    <div class="stat-card">
+      <h2>Break Timer</h2>
+      <p>Next Break In: <span id="breakTimer">25:00</span></p>
+      <button id="startBreak">Start Break</button>
     </div>
-    <div>
-      <h2>Break Reminders</h2>
-      <input type="number" id="workInterval" placeholder="Work Interval (minutes)">
-      <input type="number" id="breakInterval" placeholder="Break Interval (minutes)">
-      <button id="setIntervals">Set Intervals</button>
+
+    <!-- Productivity Score -->
+    <div class="stat-card">
+      <h2>Productivity Score</h2>
+      <p>Your Score: <span id="score">0</span> points</p>
     </div>
-    <div>
-      <h2>Notes</h2>
-      <textarea id="notes" placeholder="Take quick notes here..."></textarea>
-      <button id="saveNotes">Save</button>
-    </div>
+
+    <!-- Link to Settings -->
+    <a href="settings.html" target="_blank">Open Settings</a>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>

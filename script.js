@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadUserDefinedSites();
   } else {
     loadProductivityScore();
-    startBreakTimer();
+    startTimerDisplay();
   }
 });
 
@@ -62,32 +62,66 @@ document.getElementById("addDistractingSite")?.addEventListener("click", () => {
   }
 });
 
-// Break Timer Logic (for popup)
-let workTime = 25 * 60; // 25 minutes
-let timerInterval;
+// Start Timer Display (for popup)
+function startTimerDisplay() {
+  updateTimerDisplay(); // Initial update
+  setInterval(updateTimerDisplay, 1000); // Update every second
+}
 
-function startBreakTimer() {
-  timerInterval = setInterval(() => {
-    if (workTime > 0) {
-      workTime--;
-      const minutes = Math.floor(workTime / 60);
-      const seconds = workTime % 60;
-      document.getElementById("breakTimer").textContent =
-        `${minutes}:${seconds.toString().padStart(2, '0')}`;
-    } else {
-      clearInterval(timerInterval);
-      new Notification("Time for a break!");
-      workTime = 25 * 60; // Reset timer
-    }
-  }, 1000);
+// Update Timer Display (for popup)
+function updateTimerDisplay() {
+  chrome.storage.local.get(['workTime', 'breakTime', 'isOnBreak'], (result) => {
+    const time = result.isOnBreak ? result.breakTime : result.workTime;
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    document.getElementById("breakTimer").textContent =
+      `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  });
 }
 
 // Start Break Button (for popup)
 document.getElementById("startBreak")?.addEventListener("click", () => {
-  clearInterval(timerInterval);
-  workTime = 5 * 60; // 5-minute break
-  startBreakTimer();
+  // Hide work timer section and show break timer section
+  document.getElementById("workTimerSection").style.display = "none";
+  document.getElementById("breakTimerSection").style.display = "block";
+
+  // Start the break countdown
+  startBreakCountdown();
 });
+
+// Start Break Countdown
+let breakInterval;
+function startBreakCountdown() {
+  let breakTime = 5 * 60; // 5 minutes
+  const breakCountdownElement = document.getElementById("breakCountdown");
+
+  breakInterval = setInterval(() => {
+    if (breakTime > 0) {
+      breakTime--;
+      const minutes = Math.floor(breakTime / 60);
+      const seconds = breakTime % 60;
+      breakCountdownElement.textContent =
+        `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    } else {
+      endBreak();
+    }
+  }, 1000);
+}
+
+// End Break Button (for popup)
+document.getElementById("endBreak")?.addEventListener("click", () => {
+  endBreak();
+});
+
+// End Break Logic
+function endBreak() {
+  clearInterval(breakInterval); // Stop the break countdown
+  // Switch back to work timer section
+  document.getElementById("workTimerSection").style.display = "block";
+  document.getElementById("breakTimerSection").style.display = "none";
+  // Notify the user
+  alert("Break ended! Time to get back to work.");
+}
 
 // Load Productivity Score (for popup)
 function loadProductivityScore() {

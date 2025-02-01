@@ -1,169 +1,107 @@
 /* General Styles */
 body {
   font-family: Arial, sans-serif;
-  width: 300px;
-  padding: 10px;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
   margin: 0;
-}
-
-h1 {
-  font-size: 20px;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Light Theme (Default) */
-@media (prefers-color-scheme: light) {
-  body {
-    background-color: #f9f9f9;
-    color: #333;
-  }
-
-  .stat-card,
-  .setting-card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    margin-bottom: 15px;
-  }
-
-  .stat-card h2,
-  .setting-card h2 {
-    font-size: 16px;
-    margin-bottom: 10px;
-    color: #4CAF50;
-  }
-
-  input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    margin-top: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #fff;
-    color: #333;
-  }
-
-  button {
-    display: block;
-    width: 100%;
-    padding: 8px;
-    margin-top: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-
-  button:hover {
-    background-color: #45a049;
-  }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 10px;
-  }
-
-  li {
-    background-color: #f1f1f1;
-    padding: 8px;
-    margin-bottom: 5px;
-    border-radius: 4px;
-    font-size: 14px;
-    color: #333;
-  }
-
-  a {
-    display: block;
-    text-align: center;
-    margin-top: 10px;
-    color: #4CAF50;
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  background-color: #f9f9f9; /* Light theme background */
+  color: #333; /* Light theme text */
 }
 
 /* Dark Theme */
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #1e1e1e;
-    color: #e1e1e1;
+    background-color: #1e1e1e; /* Dark theme background */
+    color: #e1e1e1; /* Dark theme text */
   }
+}
 
-  .stat-card,
-  .setting-card {
-    background-color: #2d2d2d;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    margin-bottom: 15px;
+/* Settings Container */
+#settings {
+  width: 90%;
+  max-width: 400px; /* Limit maximum width */
+  padding: 20px;
+  background-color: #fff; /* Light theme card background */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Theme for Settings Container */
+@media (prefers-color-scheme: dark) {
+  #settings {
+    background-color: #2d2d2d; /* Dark theme card background */
   }
+}
 
-  .stat-card h2,
-  .setting-card h2 {
-    font-size: 16px;
-    margin-bottom: 10px;
-    color: #4CAF50;
-  }
+/* Setting Card Styles */
+.setting-card {
+  margin-bottom: 20px;
+}
 
+.setting-card h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #4CAF50; /* Green color for headings */
+}
+
+input[type="text"] {
+  width: 90%;
+  padding: 8px;
+  margin-top: 10px;
+  border: 1px solid #ddd; /* Light theme border */
+  border-radius: 4px;
+  background-color: #fff; /* Light theme input background */
+  color: #333; /* Light theme input text */
+}
+
+/* Dark Theme for Inputs */
+@media (prefers-color-scheme: dark) {
   input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    margin-top: 10px;
-    border: 1px solid #444;
-    border-radius: 4px;
-    background-color: #333;
-    color: #e1e1e1;
+    border: 1px solid #444; /* Dark theme border */
+    background-color: #333; /* Dark theme input background */
+    color: #e1e1e1; /* Dark theme input text */
   }
+}
 
-  button {
-    display: block;
-    width: 100%;
-    padding: 8px;
-    margin-top: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-  }
+button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  background-color: #4CAF50; /* Green button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
 
-  button:hover {
-    background-color: #45a049;
-  }
+button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 10px;
-  }
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+}
 
+li {
+  background-color: #f1f1f1; /* Light theme list item background */
+  padding: 8px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333; /* Light theme list item text */
+}
+
+/* Dark Theme for List Items */
+@media (prefers-color-scheme: dark) {
   li {
-    background-color: #444;
-    padding: 8px;
-    margin-bottom: 5px;
-    border-radius: 4px;
-    font-size: 14px;
-    color: #e1e1e1;
-  }
-
-  a {
-    display: block;
-    text-align: center;
-    margin-top: 10px;
-    color: #4CAF50;
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
+    background-color: #444; /* Dark theme list item background */
+    color: #e1e1e1; /* Dark theme list item text */
   }
 }

@@ -82,32 +82,3 @@ ul li {
   color: #333;
 }
 
-/* Link Styling */
-a {
-  display: inline-block;
-  margin-top: 15px;
-  color: #007acc;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Popup Container */
-#popup {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-/* Stat Cards */
-.stat-card {
-  background: #e3f2fd;
-  padding: 15px;
-  border-radius: 8px;
-  margin: 10px 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}

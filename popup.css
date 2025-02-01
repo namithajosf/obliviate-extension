@@ -1,0 +1,65 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    width: 300px;
+  }
+  
+  h1 {
+    font-size: 24px;
+    color: #444;
+    margin-bottom: 10px;
+  }
+  
+   
+  /* Button Styling */
+  button {
+    background: #007acc;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    transition: background 0.3s;
+  }
+  
+  button:hover {
+    background: #005f99;
+  }
+  
+  
+  /* Link Styling */
+  a {
+    display: inline-block;
+    margin-top: 15px;
+    color: #007acc;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Popup Container */
+  #popup {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  /* Stat Cards */
+  .stat-card {
+    background: #e3f2fd;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }

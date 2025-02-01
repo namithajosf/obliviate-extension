@@ -48,7 +48,7 @@ function startWorkTimer() {
         message: 'Take a 5-minute break.'
       });
       workTime = 25 * 60; // Reset work timer
-      startBreakTimer();
+      startBreakTimer(); // Automatically start the break timer
     }
   }, 1000);
 }
@@ -69,25 +69,34 @@ function startBreakTimer() {
         message: 'Time to get back to work.'
       });
       breakTime = 5 * 60; // Reset break timer
-      startWorkTimer();
+      startWorkTimer(); // Automatically start the work timer
     }
   }, 1000);
 }
 
 // Initialize the timer when the extension loads
-chrome.storage.local.get(['workTime', 'breakTime'], (result) => {
-  if (result.workTime === undefined || result.breakTime === undefined) {
-    chrome.storage.local.set({ workTime: 25 * 60, breakTime: 5 * 60 });
+chrome.storage.local.get(['workTime', 'breakTime', 'isOnBreak'], (result) => {
+  if (result.workTime === undefined || result.breakTime === undefined || result.isOnBreak === undefined) {
+    chrome.storage.local.set({ workTime: 25 * 60, breakTime: 5 * 60, isOnBreak: false });
   }
-  startWorkTimer();
+  if (result.isOnBreak) {
+    startBreakTimer();
+  } else {
+    startWorkTimer();
+  }
 });
 
-// Listen for messages from the popup to start a break manually
+// Listen for messages from the popup to start or end breaks manually
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "startBreak") {
     clearInterval(timerInterval);
     workTime = 25 * 60; // Reset work timer
     breakTime = 5 * 60; // Reset break timer
     startBreakTimer();
+  } else if (request.action === "endBreak") {
+    clearInterval(timerInterval);
+    workTime = 25 * 60; // Reset work timer
+    breakTime = 5 * 60; // Reset break timer
+    startWorkTimer();
   }
 });

@@ -14,5 +14,6 @@
     "permissions": ["tabs", "storage", "alarms", "notifications"],
     "background": {
       "service_worker": "background.js"
-    }
+    },
+    "options_page": "settings.html"
   }

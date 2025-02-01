@@ -1,107 +1,113 @@
 /* General Styles */
 body {
-  font-family: Arial, sans-serif;
-  width: 100%;
-  height: 100vh; /* Full viewport height */
+  font-family: 'Arial', sans-serif;
+  background: #f5f7fa;
+  color: #333;
+  text-align: center;
   margin: 0;
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  background-color: #f9f9f9; /* Light theme background */
-  color: #333; /* Light theme text */
-}
-
-/* Dark Theme */
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #1e1e1e; /* Dark theme background */
-    color: #e1e1e1; /* Dark theme text */
-  }
-}
-
-/* Settings Container */
-#settings {
-  width: 90%;
-  max-width: 400px; /* Limit maximum width */
   padding: 20px;
-  background-color: #fff; /* Light theme card background */
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
 }
 
-/* Dark Theme for Settings Container */
-@media (prefers-color-scheme: dark) {
-  #settings {
-    background-color: #2d2d2d; /* Dark theme card background */
-  }
+h1 {
+  font-size: 24px;
+  color: #444;
+  margin-bottom: 10px;
 }
 
-/* Setting Card Styles */
+/* Popup Container */
+#settings {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Setting Cards */
 .setting-card {
-  margin-bottom: 20px;
+  background: #e3f2fd;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 10px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .setting-card h2 {
-  font-size: 16px;
+  font-size: 18px;
+  color: #007acc;
   margin-bottom: 10px;
-  color: #4CAF50; /* Green color for headings */
 }
 
+/* Input Styling */
 input[type="text"] {
-  width: 90%;
-  padding: 8px;
-  margin-top: 10px;
-  border: 1px solid #ddd; /* Light theme border */
-  border-radius: 4px;
-  background-color: #fff; /* Light theme input background */
-  color: #333; /* Light theme input text */
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
 }
 
-/* Dark Theme for Inputs */
-@media (prefers-color-scheme: dark) {
-  input[type="text"] {
-    border: 1px solid #444; /* Dark theme border */
-    background-color: #333; /* Dark theme input background */
-    color: #e1e1e1; /* Dark theme input text */
-  }
-}
-
+/* Button Styling */
 button {
-  display: block;
-  width: 100%;
-  padding: 8px;
-  margin-top: 10px;
-  background-color: #4CAF50; /* Green button */
+  background: #007acc;
   color: white;
   border: none;
-  border-radius: 4px;
+  padding: 10px 15px;
+  border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
+  margin-top: 10px;
+  transition: background 0.3s;
 }
 
 button:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background: #005f99;
 }
 
+/* List Styling */
 ul {
   list-style-type: none;
   padding: 0;
-  margin-top: 10px;
+  margin: 0;
 }
 
-li {
-  background-color: #f1f1f1; /* Light theme list item background */
-  padding: 8px;
-  margin-bottom: 5px;
-  border-radius: 4px;
+ul li {
+  background: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   font-size: 14px;
-  color: #333; /* Light theme list item text */
+  color: #333;
 }
 
-/* Dark Theme for List Items */
-@media (prefers-color-scheme: dark) {
-  li {
-    background-color: #444; /* Dark theme list item background */
-    color: #e1e1e1; /* Dark theme list item text */
-  }
+/* Link Styling */
+a {
+  display: inline-block;
+  margin-top: 15px;
+  color: #007acc;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Popup Container */
+#popup {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+/* Stat Cards */
+.stat-card {
+  background: #e3f2fd;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 10px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }

@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Test</title>
-    <script src="popup.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obliviate</title>
+  <link rel="stylesheet" href="popup.css">
+  <script src="script.js"></script>
 </head>
 <body>
-    <h2 id="greet">Hello!</h2>
+  <div id="popup">
+    <h1>Obliviate</h1>
+
+    <!-- Break Timer -->
+    <div class="stat-card">
+      <h2>Break Timer</h2>
+      <p>Next Break In: <span id="breakTimer">25:00</span></p>
+      <button id="startBreak">Start Break</button>
+    </div>
+
+    <!-- Productivity Score -->
+    <div class="stat-card">
+      <h2>Productivity Score</h2>
+      <p>Your Score: <span id="score">0</span></p>
+    </div>
+
+</div>
+
 </body>
 </html>

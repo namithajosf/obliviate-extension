@@ -1,30 +1,101 @@
-// Track active tabs
+console.log("Background script is running.");
+
+let lastActiveTab = null;
+let lastActiveTime = Date.now();
+
+// Example categories (can be modified)
+const productiveSites = [
+  "stackoverflow.com",
+  "github.com",
+  "www.notion.so",
+  "linkedin.com", 
+  "trello.com", 
+  "slack.com"
+];
+
+const distractingSites = [
+  "youtube.com",
+  "facebook.com",
+  "twitter.com",
+  "instagram.com",
+  "reddit.com"
+];
+
+
+// Track active tab changes
 chrome.tabs.onActivated.addListener((activeInfo) => {
-  chrome.tabs.get(activeInfo.tabId, (tab) => {
-    const url = new URL(tab.url).hostname;
-    console.log(`User is on: ${url}`);
-    trackTimeSpent(url);
-  });
+  try {
+    chrome.tabs.get(activeInfo.tabId, (tab) => {
+      if (!tab || !tab.url) {
+        console.error("Tab URL is not valid:", tab);
+        return;
+      }
+
+      const url = new URL(tab.url).hostname;
+      console.log(`User is on: ${url}`);
+
+      if (isProductive(url)) {
+        console.log(`${url} is a productive site.`);
+      } else if (isDistracting(url)) {
+        console.log(`${url} is a distracting site.`);
+      } else {
+        console.log(`${url} is neither productive nor distracting.`);
+      }
+
+      if (lastActiveTab) {
+        const timeSpent = (Date.now() - lastActiveTime) / 1000; // Convert ms to seconds
+        updateTime(lastActiveTab, timeSpent);
+      }
+
+      lastActiveTab = url;
+      lastActiveTime = Date.now();
+    });
+  } catch (error) {
+    console.error("Error in tab activation listener:", error);
+  }
 });
 
-// Categorize websites
-const productiveSites = ["notion.so", "github.com"];
+// Update time spent on a site
+function updateTime(url, timeSpent) {
+  try {
+    chrome.storage.local.get(['timeSpent'], (result) => {
+      const timeData = result.timeSpent || { productive: 0, distracting: 0 };
+
+      if (isProductive(url)) {
+        timeData.productive += timeSpent;
+      } else if (isDistracting(url)) {
+        timeData.distracting += timeSpent;
+      }
+
+      chrome.storage.local.set({ timeSpent: timeData });
+    });
+  } catch (error) {
+    console.error("Error updating time:", error);
+  }
+}
+
+// Categorization functions
 function isProductive(url) {
   return productiveSites.includes(url);
 }
 
-// Track time spent on websites
-function trackTimeSpent(url) {
-  chrome.storage.local.get(['timeSpent'], (result) => {
-    const timeSpent = result.timeSpent || { productive: 0, distracting: 0 };
-    if (isProductive(url)) {
-      timeSpent.productive += 1;
-    } else {
-      timeSpent.distracting += 1;
-    }
-    chrome.storage.local.set({ timeSpent });
-  });
+function isDistracting(url) {
+  return distractingSites.includes(url);
 }
+
+// Handle tab closing
+chrome.tabs.onRemoved.addListener(() => {
+  try {
+    if (lastActiveTab) {
+      const timeSpent = (Date.now() - lastActiveTime) / 1000;
+      updateTime(lastActiveTab, timeSpent);
+    }
+    lastActiveTab = null;
+    lastActiveTime = Date.now();
+  } catch (error) {
+    console.error("Error in tab removal listener:", error);
+  }
+});
 
 // Break timer logic
 let workTime = 25 * 60; // 25 minutes

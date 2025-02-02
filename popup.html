@@ -5,33 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Obliviate</title>
   <link rel="stylesheet" href="popup.css">
+  <script src="script.js"></script>
 </head>
 <body>
   <div id="popup">
     <h1>Obliviate</h1>
 
-    <!-- Work Timer -->
-    <div class="stat-card" id="workTimerSection">
+    <!-- Break Timer -->
+    <div class="stat-card">
       <h2>Break Timer</h2>
       <p>Next Break In: <span id="breakTimer">25:00</span></p>
       <button id="startBreak">Start Break</button>
     </div>
 
-    <!-- Break Timer -->
-    <div class="stat-card" id="breakTimerSection" style="display: none;">
-      <h2>Break Timer</h2>
-      <p>Work Time Starts In: <span id="breakCountdown">05:00</span></p>
-      <button id="endBreak">End Break</button>
-    </div>
-
     <!-- Productivity Score -->
     <div class="stat-card">
       <h2>Productivity Score</h2>
-      <p>Your Score: <span id="score">0</span> points</p>
+      <p>Your Score: <span id="score">0</span></p>
     </div>
 
- </div>
+</div>
 
-  <script src="script.js"></script>
 </body>
 </html>

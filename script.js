@@ -10,11 +10,11 @@ port.onMessage.addListener((message) => {
 // Request current score when popup opens
 port.postMessage({ action: "getProductivityScore" });
 
-//Start Timer Display
-function startTimerDisplay(){
+document.addEventListener("DOMContentLoaded", () => {
+  loadProductivityScore();
   updateTimerDisplay();
-  setInterval(updateTimerDisplay, 1000);
-}
+  startTimerSync();
+})
 
 // Update Timer Display (for popup)
 function updateTimerDisplay() {

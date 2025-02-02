@@ -10,6 +10,12 @@ port.onMessage.addListener((message) => {
 // Request current score when popup opens
 port.postMessage({ action: "getProductivityScore" });
 
+//Start Timer Display
+function startTimerDisplay(){
+  updateTimerDisplay();
+  setInterval(updateTimerDisplay, 1000);
+}
+
 // Update Timer Display (for popup)
 function updateTimerDisplay() {
   chrome.storage.local.get(['workTime', 'breakTime', 'isOnBreak'], (result) => {

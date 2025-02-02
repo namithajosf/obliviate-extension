@@ -54,10 +54,6 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
     console.error("Error in tab activation listener:", error);
   }
 });
-
-// Break timer logic
-let workTime = 25 * 60; // 25 minutes
-let breakTime = 5 * 60; // 5 minutes
 // Categorization functions
 function isProductive(url) {
   return productiveSites.includes(url);
@@ -152,6 +148,10 @@ chrome.tabs.onRemoved.addListener(() => {
   }
 });
 
+
+// Break timer logic
+let workTime = 25 * 60; // 25 minutes
+let breakTime = 5 * 60; // 5 minutes
 let timerInterval;
 let isOnBreak = false;
 

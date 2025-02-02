@@ -1,14 +1,10 @@
-let port = chrome.runtime.connect({ name: "popup" });
-
-port.onMessage.addListener((message) => {
-    if (message.action === "updateScore") {
-        console.log("Received score update:", message.score);
-        document.getElementById("score").innerText = message.score + " points";
-    }
+// Load saved data when the popup opens
+document.addEventListener("DOMContentLoaded", () => {
+    loadProductivityScore();
+    startTimerDisplay();
 });
 
-// Request current score when popup opens
-port.postMessage({ action: "getProductivityScore" });
+
 
 // Start Timer Display (for popup)
 function startTimerDisplay() {
@@ -51,14 +47,14 @@ function startBreakCountdown() {
       breakCountdownElement.textContent =
         `${minutes}:${seconds.toString().padStart(2, '0')}`;
     } else {
-      endBreak();
+      endBreak(); // Call endBreak when countdown finishes naturally
     }
   }, 1000);
 }
 
 // End Break Button (for popup)
 document.getElementById("endBreak")?.addEventListener("click", () => {
-  endBreak();
+  endBreak(); // Call endBreak when user manually ends the break
 });
 
 // End Break Logic
@@ -68,7 +64,20 @@ function endBreak() {
   document.getElementById("workTimerSection").style.display = "block";
   document.getElementById("breakTimerSection").style.display = "none";
   // Notify the user
-  alert("Break ended! Time to get back to work.");
+  showNotification("Break Ended", "Time to get back to work!");
+}
+
+// Show Notification
+function showNotification(title, message) {
+  if (Notification.permission === "granted") {
+    new Notification(title, { body: message });
+  } else if (Notification.permission !== "denied") {
+    Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        new Notification(title, { body: message });
+      }
+    });
+  }
 }
 
 // Load Productivity Score (for popup)

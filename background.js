@@ -7,25 +7,6 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
   });
 });
 
-// Categorize websites
-const productiveSites = ["notion.so", "github.com"];
-function isProductive(url) {
-  return productiveSites.includes(url);
-}
-
-// Track time spent on websites
-function trackTimeSpent(url) {
-  chrome.storage.local.get(['timeSpent'], (result) => {
-    const timeSpent = result.timeSpent || { productive: 0, distracting: 0 };
-    if (isProductive(url)) {
-      timeSpent.productive += 1;
-    } else {
-      timeSpent.distracting += 1;
-    }
-    chrome.storage.local.set({ timeSpent });
-  });
-}
-
 // Break timer logic
 let workTime = 25 * 60; // 25 minutes
 let breakTime = 5 * 60; // 5 minutes
@@ -48,7 +29,7 @@ function startWorkTimer() {
         message: 'Take a 5-minute break.'
       });
       workTime = 25 * 60; // Reset work timer
-      startBreakTimer(); // Automatically start the break timer
+      startBreakTimer();
     }
   }, 1000);
 }
@@ -69,34 +50,25 @@ function startBreakTimer() {
         message: 'Time to get back to work.'
       });
       breakTime = 5 * 60; // Reset break timer
-      startWorkTimer(); // Automatically start the work timer
+      startWorkTimer();
     }
   }, 1000);
 }
 
 // Initialize the timer when the extension loads
-chrome.storage.local.get(['workTime', 'breakTime', 'isOnBreak'], (result) => {
-  if (result.workTime === undefined || result.breakTime === undefined || result.isOnBreak === undefined) {
-    chrome.storage.local.set({ workTime: 25 * 60, breakTime: 5 * 60, isOnBreak: false });
+chrome.storage.local.get(['workTime', 'breakTime'], (result) => {
+  if (result.workTime === undefined || result.breakTime === undefined) {
+    chrome.storage.local.set({ workTime: 25 * 60, breakTime: 5 * 60 });
   }
-  if (result.isOnBreak) {
-    startBreakTimer();
-  } else {
-    startWorkTimer();
-  }
+  startWorkTimer();
 });
 
-// Listen for messages from the popup to start or end breaks manually
+// Listen for messages from the popup to start a break manually
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "startBreak") {
     clearInterval(timerInterval);
     workTime = 25 * 60; // Reset work timer
     breakTime = 5 * 60; // Reset break timer
     startBreakTimer();
-  } else if (request.action === "endBreak") {
-    clearInterval(timerInterval);
-    workTime = 25 * 60; // Reset work timer
-    breakTime = 5 * 60; // Reset break timer
-    startWorkTimer();
   }
 });

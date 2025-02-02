@@ -51,14 +51,14 @@ function startBreakCountdown() {
       breakCountdownElement.textContent =
         `${minutes}:${seconds.toString().padStart(2, '0')}`;
     } else {
-      endBreak(); // Call endBreak when countdown finishes naturally
+      endBreak();
     }
   }, 1000);
 }
 
 // End Break Button (for popup)
 document.getElementById("endBreak")?.addEventListener("click", () => {
-  endBreak(); // Call endBreak when user manually ends the break
+  endBreak();
 });
 
 // End Break Logic
@@ -68,20 +68,7 @@ function endBreak() {
   document.getElementById("workTimerSection").style.display = "block";
   document.getElementById("breakTimerSection").style.display = "none";
   // Notify the user
-  showNotification("Break Ended", "Time to get back to work!");
-}
-
-// Show Notification
-function showNotification(title, message) {
-  if (Notification.permission === "granted") {
-    new Notification(title, { body: message });
-  } else if (Notification.permission !== "denied") {
-    Notification.requestPermission().then((permission) => {
-      if (permission === "granted") {
-        new Notification(title, { body: message });
-      }
-    });
-  }
+  alert("Break ended! Time to get back to work.");
 }
 
 // Load Productivity Score (for popup)

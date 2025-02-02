@@ -149,6 +149,11 @@ chrome.tabs.onRemoved.addListener(() => {
   }
 });
 
+let workTime = 25 * 60;
+let breakTime = 5 * 60;
+let timerInterval;
+let isOnBreak = false;
+
 // Start the work timer
 function startWorkTimer() {
   isOnBreak = false;

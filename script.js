@@ -1,16 +1,20 @@
-// Load saved data when the popup opens
-document.addEventListener("DOMContentLoaded", () => {
-    loadProductivityScore();
-    startTimerDisplay();
+let port = chrome.runtime.connect({ name: "popup" });
+
+port.onMessage.addListener((message) => {
+  if (message.action === "updateScore") {
+    console.log("Received score update:", message.score);
+    document.getElementById("score").innerText = message.score + " points";
+  }
 });
 
+// Request current score when popup opens
+port.postMessage({ action: "getProductivityScore" });
 
-
-// Start Timer Display (for popup)
-function startTimerDisplay() {
-  updateTimerDisplay(); // Initial update
-  setInterval(updateTimerDisplay, 1000); // Update every second
-}
+document.addEventListener("DOMContentLoaded", () => {
+  loadProductivityScore();
+  updateTimerDisplay();
+  startTimerSync();
+})
 
 // Update Timer Display (for popup)
 function updateTimerDisplay() {

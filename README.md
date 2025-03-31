@@ -6,8 +6,8 @@
 ### Team Members
 - Member 1: Namitha Joseph - CUSAT
 - Member 2: Sneha Dileep - CUSAT
-### Hosted Project Link
-[Add your hosted project link here, e.g., Chrome Web Store link or GitHub Pages link]
+
+**This project was built as a part of TINK-HER-HACK 3.0**
 
 ### Project Description
 Obliviate is a productivity-focused Chrome extension that helps users stay focused by tracking time spent on productive and distracting websites. It features a Pomodoro-style break timer and productivity scoring.
